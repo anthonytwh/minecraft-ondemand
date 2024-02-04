@@ -1,0 +1,106 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2024-02-03T20:16:59.104013-05:00",
+  "ArtifactName": "anthonytwh/minecraft-ecsfargate-watchdog:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "amazon",
+      "Name": "2 (Karoo)"
+    },
+    "ImageID": "sha256:92473a3cbdb540c6e694c057e35c10b4309139114f95fc9958fd66f32ed2f770",
+    "DiffIDs": [
+      "sha256:7cbc4ba24a3c1bf1e3771b19030a787b97832a4e48943e3293ff0526a487e2cd",
+      "sha256:771a3e42ffbc4e55be049f21ab0614184b05a9afa50515924a8bc5e1de5b566a",
+      "sha256:e81847e3f45e53d3cb0b8a572d0840d5caea4132648fa48218fb581404256317",
+      "sha256:9b21243b4978fd9406e26cee9fd6faf562266f15cbd77836596cf707eb2bed72",
+      "sha256:1ef926f1b55e63ce34c6c7d96ee5a51f9fe4da400ffd8faec29d35bbd763b340",
+      "sha256:8504b3b81317923ace9f45c4959c624d4e5c1fb660878691633544df0a154fcd",
+      "sha256:215fa788db1666cffd256906914da609189bd0e8d75f7f8cb32ca0c90ed22e6e"
+    ],
+    "RepoTags": [
+      "anthonytwh/minecraft-ecsfargate-watchdog:latest"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2024-02-04T00:59:48.133188926Z",
+      "history": [
+        {
+          "created": "2024-01-26T18:43:35.938951805Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:d00ff253a0cf61501fe3e698475a9fad05c3beeaa9313e6a430850d31b21cb10 in / "
+        },
+        {
+          "created": "2024-01-26T18:43:37.241417525Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/bash\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2024-02-02T16:56:07.42901326Z",
+          "created_by": "/bin/sh -c yum update -y   \u0026\u0026 yum install -y less groff   \u0026\u0026 yum clean all"
+        },
+        {
+          "created": "2024-02-02T16:56:11.184968244Z",
+          "created_by": "/bin/sh -c #(nop) COPY dir:a3b876a6f43a7f01f991ef9ea65ae1dee61573bb3c32183c95d5373a4df5c7fa in /usr/local/aws-cli/ "
+        },
+        {
+          "created": "2024-02-02T16:56:12.507469362Z",
+          "created_by": "/bin/sh -c #(nop) COPY dir:4b9c2fc92a7964944e14532a25ea9d70a4d6987e757191c789d81604907f8ac9 in /usr/local/bin/ "
+        },
+        {
+          "created": "2024-02-02T16:56:12.68450735Z",
+          "created_by": "/bin/sh -c #(nop) WORKDIR /aws"
+        },
+        {
+          "created": "2024-02-02T16:56:12.851957336Z",
+          "created_by": "/bin/sh -c #(nop)  ENTRYPOINT [\"/usr/local/bin/aws\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2024-02-04T00:59:48.069835571Z",
+          "created_by": "RUN /bin/sh -c yum upgrade \u0026\u0026     yum install -y net-tools jq nmap-ncat \u0026\u0026     yum clean all \u0026\u0026 yum autoremove # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2024-02-04T00:59:48.133188926Z",
+          "created_by": "COPY ./watchdog.sh . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2024-02-04T00:59:48.133188926Z",
+          "created_by": "ENTRYPOINT [\"./watchdog.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:7cbc4ba24a3c1bf1e3771b19030a787b97832a4e48943e3293ff0526a487e2cd",
+          "sha256:771a3e42ffbc4e55be049f21ab0614184b05a9afa50515924a8bc5e1de5b566a",
+          "sha256:e81847e3f45e53d3cb0b8a572d0840d5caea4132648fa48218fb581404256317",
+          "sha256:9b21243b4978fd9406e26cee9fd6faf562266f15cbd77836596cf707eb2bed72",
+          "sha256:1ef926f1b55e63ce34c6c7d96ee5a51f9fe4da400ffd8faec29d35bbd763b340",
+          "sha256:8504b3b81317923ace9f45c4959c624d4e5c1fb660878691633544df0a154fcd",
+          "sha256:215fa788db1666cffd256906914da609189bd0e8d75f7f8cb32ca0c90ed22e6e"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "./watchdog.sh"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "WorkingDir": "/aws"
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "anthonytwh/minecraft-ecsfargate-watchdog:latest (amazon 2 (Karoo))",
+      "Class": "os-pkgs",
+      "Type": "amazon"
+    }
+  ]
+}
