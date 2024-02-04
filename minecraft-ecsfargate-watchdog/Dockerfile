@@ -3,8 +3,9 @@
 
 FROM amazon/aws-cli
 
-RUN yum install -y net-tools jq nmap-ncat && \
-    yum clean all
+RUN yum upgrade && \ 
+    yum install -y net-tools jq nmap-ncat && \
+    yum clean all && yum autoremove
 
 COPY ./watchdog.sh .
 
