@@ -53,6 +53,22 @@ echo I believe our eni is $ENI
 PUBLICIP=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI --query 'NetworkInterfaces[0].Association.PublicIp' --output text)
 echo "I believe our public IP address is $PUBLICIP"
 
+## Validate we have a real IP address before updating DNS
+if [ "$PUBLICIP" = "None" ] || [ -z "$PUBLICIP" ]
+then
+  echo "ERROR: Failed to retrieve valid public IP address. Got: '$PUBLICIP'"
+  echo "Waiting 30 seconds for IP address to be assigned..."
+  sleep 30
+  PUBLICIP=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI --query 'NetworkInterfaces[0].Association.PublicIp' --output text)
+  echo "Retry - public IP address is: $PUBLICIP"
+  
+  if [ "$PUBLICIP" = "None" ] || [ -z "$PUBLICIP" ]
+  then
+    echo "ERROR: Still no valid public IP address after retry. Cannot update DNS. Exiting."
+    zero_service
+  fi
+fi
+
 ## update public dns record
 echo "Updating DNS record for $SERVERNAME to $PUBLICIP"
 ## prepare json file
